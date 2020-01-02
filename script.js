@@ -1,6 +1,5 @@
 
 
-$('<h1>').appendTo('#main').text('helllo')
 function showPoses () {
     for (var i = 0; i < yogaPosesArr.length; i++) {
         var cardDiv = $('<div>').attr({
@@ -43,15 +42,16 @@ $('#main').ready(function(){
     var exampleFlow = [7, 8, 15, 14, 26, 30, 31],
           counter = 0,
           timer = setInterval(function(){
+                $('#main').html(" ");
                 showPose(exampleFlow[counter]);
                 counter++
                 if (counter === exampleFlow.length) {
-                      clearInterval(timer);
+                    clearInterval(timer);
                 }
           },2000);
 
     function showPose (poses) {
-    // console.log(poses);
+    console.log(poses);
     $('<img>').attr('src', yogaPosesArr[poses-1].img_url).prependTo('#main')
 
     }
