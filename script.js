@@ -40,8 +40,13 @@ function showPoses () {
 
 function showFlows () {
     $('#main').html(" ");
+    var flowUiCardDiv = $('<div>').attr({
+        class: "ui link cards"});
+
     var flowCardDiv = $('<div>').attr({
-        class: "ui card"})
+        class: "card"
+    });
+    flowCardDiv.appendTo(flowUiCardDiv);
 
     var flowCardContent = $('<div>').attr({
         class: "content"
@@ -61,7 +66,7 @@ function showFlows () {
         var flowCardP = $('<p>').text(yogaPosesArr[i].english_name)
         flowCardP.appendTo(flowCardContent);
     }
-    flowCardDiv.appendTo('#main');
+    flowUiCardDiv.appendTo('#main');
 };
 
 // $('#main').ready(function(){
