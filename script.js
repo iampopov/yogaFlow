@@ -21,7 +21,7 @@ function showPoses () {
     for (var i = 0; i < yogaPosesArr.length; i++) {
         var cardDiv = $('<div>').attr({
             class: "card",
-            value: yogaPosesArr[i].id,
+            name: yogaPosesArr[i].id,
             id: "crdHover"
         });
 
@@ -32,11 +32,13 @@ function showPoses () {
         
         var cardImage = $('<img>').attr({
             src: yogaPosesArr[i].img_url,
+            // value: yogaPosesArr[i].id
         });
         cardImage.appendTo(cardImgDiv);
 
         var cardCont = $('<div>').attr({
-            class: "content",
+            class: "content"
+            // value: yogaPosesArr[i].id
         });
 
         cardCont.appendTo(cardDiv);
@@ -56,6 +58,13 @@ function showPoses () {
         cardDiv.appendTo("#poses");
     };
 };
+
+function addPose () {
+console.log($(this).attr('name'));
+
+
+
+}
 
 function showFlows () {
     $('#main').html(" ");
@@ -109,4 +118,4 @@ function showFlows () {
 
 $('#topMenu').on("click", "#createFlow", showPoses);
 $('#topMenu').on("click", "#flows", showFlows);
-
+$('#poses').on("click", "#crdHover", addPose);
