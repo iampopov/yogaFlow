@@ -1,23 +1,42 @@
 var exampleFlow = [7, 8, 15, 14, 26, 30, 31]
 
 function showPoses () {
+    $('#main').html(" ");
+    var newFlow = $('<div>').attr({
+        class: "ui fluid action input"
+    });
+
+    var inputBox = $('<input>').attr({
+        type: "text",
+        placeholder: "Enter your flow name..."
+    });
+    inputBox.appendTo(newFlow);
+
+    var saveFlowBtn = $('<div>').attr({
+        class: "ui button"
+    }).text('Save your flow');
+    saveFlowBtn.appendTo(newFlow);
+
+    newFlow.appendTo("#main");
     for (var i = 0; i < yogaPosesArr.length; i++) {
         var cardDiv = $('<div>').attr({
-            class: "card"
+            class: "card",
+            value: yogaPosesArr[i].id,
+            id: "crdHover"
         });
 
         var cardImgDiv = $('<div>').attr({
-            class: "image"
+            class: "image",
         });
         cardImgDiv.appendTo(cardDiv);
         
         var cardImage = $('<img>').attr({
-            src: yogaPosesArr[i].img_url
+            src: yogaPosesArr[i].img_url,
         });
         cardImage.appendTo(cardImgDiv);
 
         var cardCont = $('<div>').attr({
-            class: "content"
+            class: "content",
         });
 
         cardCont.appendTo(cardDiv);
