@@ -1,9 +1,11 @@
 var exampleFlow = [7, 8, 15, 14, 26, 30, 31]
+var createFlowArr = [];
 
 function showPoses () {
     $('#main').html(" ");
     var newFlow = $('<div>').attr({
-        class: "ui fluid action input"
+        class: "ui fluid action input",
+        id: "flowInputName"
     });
 
     var inputBox = $('<input>').attr({
@@ -13,32 +15,31 @@ function showPoses () {
     inputBox.appendTo(newFlow);
 
     var saveFlowBtn = $('<div>').attr({
-        class: "ui button"
+        class: "ui button",
+        id: "saveFlowBtn"
     }).text('Save your flow');
     saveFlowBtn.appendTo(newFlow);
 
     newFlow.appendTo("#main");
     for (var i = 0; i < yogaPosesArr.length; i++) {
         var cardDiv = $('<div>').attr({
-            class: "card",
+            class: "ui link card",
             name: yogaPosesArr[i].id,
             id: "crdHover"
         });
 
         var cardImgDiv = $('<div>').attr({
-            class: "image",
+            class: "image"
         });
         cardImgDiv.appendTo(cardDiv);
         
         var cardImage = $('<img>').attr({
             src: yogaPosesArr[i].img_url,
-            // value: yogaPosesArr[i].id
         });
         cardImage.appendTo(cardImgDiv);
 
         var cardCont = $('<div>').attr({
             class: "content"
-            // value: yogaPosesArr[i].id
         });
 
         cardCont.appendTo(cardDiv);
@@ -60,12 +61,20 @@ function showPoses () {
 };
 
 function addPose () {
-console.log($(this).attr('name'));
-
-
-
+// console.log($(this).attr('name'));
+var selectedPose = $(this).attr('name')
+createFlowArr.push(selectedPose);
+   
+    var cardImage = $('<img>').attr({
+        src: yogaPosesArr[selectedPose].img_url,
+        width: "24.84%",
+        style: "display: inline; border: solid lightgray 1px; border-radius: 5px; padding: 10px; margin: 1px 1px 0 0;",
+        name: yogaPosesArr[selectedPose].id,
+        id: "imgHover"
+    });
+    cardImage.appendTo("#main");
 }
-
+// console.log(createFlowArr);
 function showFlows () {
     $('#main').html(" ");
     var flowUiCardDiv = $('<div>').attr({
@@ -97,6 +106,10 @@ function showFlows () {
     flowUiCardDiv.appendTo('#main');
 };
 
+function saveFlow () {
+    console.log("this");
+}
+
 // $('#main').ready(function(){
 //         exampleFlow, //i might use this for on click here
 //           counter = 0,
@@ -119,3 +132,4 @@ function showFlows () {
 $('#topMenu').on("click", "#createFlow", showPoses);
 $('#topMenu').on("click", "#flows", showFlows);
 $('#poses').on("click", "#crdHover", addPose);
+$('#main').on("click", "#saveFlowBtn", saveFlow)
