@@ -78,6 +78,7 @@ createFlowArr.push(selectedPose);
 // console.log(createFlowArr);
 function showFlows () {
     $('#main').html(" ");
+    $('#poses').html(" ");
     var flowUiCardDiv = $('<div>').attr({
         class: "ui link cards"});
 
@@ -105,12 +106,49 @@ function showFlows () {
         flowCardP.appendTo(flowCardContent);
     }
     flowUiCardDiv.appendTo('#main');
+
+    for(var i =0; i < localStorage.length; i++){
+        var currentArray = JSON.parse(localStorage.getItem(localStorage.key(i)));
+        //console.log(localStorage.getItem(localStorage.key(i)));
+        console.log(currentArray);
+
+        var flowUiCardDiv = $('<div>').attr({
+            class: "ui link cards"});
+    
+        var flowCardDiv = $('<div>').attr({
+            class: "card"
+        });
+        flowCardDiv.appendTo(flowUiCardDiv);
+    
+        var flowCardContent = $('<div>').attr({
+            class: "content"
+        })
+        flowCardContent.appendTo(flowCardDiv);
+    
+        var flowCardHeader = $('<div>').attr({
+            class: "header"
+        }).text(localStorage.key(i))
+        flowCardHeader.appendTo(flowCardContent);
+    
+        var flowCardDesc = $('<div>').attr({
+            class: "description"
+        })
+        flowCardDesc.appendTo(flowCardContent);
+        // doesnt work and i dont know why:
+        // for (i=0; i<currentArray.length; i++){
+        //     var flowCardP = $('<p>').text(yogaPosesArr[i].english_name)
+        //     flowCardP.appendTo(flowCardContent);
+        // }
+        flowUiCardDiv.appendTo('#main');
+    }
 };
 
 function saveFlow () {
     // console.log("this");
     var flowName = $("#showPosesIdField").val();
-    console.log(flowName);
+    //console.log(flowName);
+    localStorage.setItem(flowName, JSON.stringify(createFlowArr));
+    $("#showPosesIdField").val(" ");
 }
 
 // $('#main').ready(function(){
@@ -132,7 +170,7 @@ function saveFlow () {
 
 
 
-$('#topMenu').on("click", "#createFlow", showPoses);
-$('#topMenu').on("click", "#flows", showFlows);
+$("#createFlow").on("click", showPoses);
+$("#flows").on("click", showFlows);
 $('#poses').on("click", "#crdHover", addPose);
 $('#main').on("click", "#saveFlowBtn", saveFlow)
