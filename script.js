@@ -10,7 +10,8 @@ function showPoses () {
 
     var inputBox = $('<input>').attr({
         type: "text",
-        placeholder: "Enter your flow name..."
+        placeholder: "Enter your flow name...",
+        id: "showPosesIdField"
     });
     inputBox.appendTo(newFlow);
 
@@ -107,7 +108,9 @@ function showFlows () {
 };
 
 function saveFlow () {
-    console.log("this");
+    // console.log("this");
+    var flowName = $("#showPosesIdField").val();
+    console.log(flowName);
 }
 
 // $('#main').ready(function(){
