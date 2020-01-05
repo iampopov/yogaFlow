@@ -88,7 +88,8 @@ function showFlows () {
     flowCardDiv.appendTo(flowUiCardDiv);
 
     var flowCardContent = $('<div>').attr({
-        class: "content"
+        class: "content",
+        id: "flowClick"
     })
     flowCardContent.appendTo(flowCardDiv);
 
@@ -101,16 +102,16 @@ function showFlows () {
         class: "description"
     })
     flowCardDesc.appendTo(flowCardContent);
-    for (i=0; i<exampleFlow.length; i++){
-        var flowCardP = $('<p>').text(yogaPosesArr[i].english_name)
-        flowCardP.appendTo(flowCardContent);
-    }
+    // for (i=0; i<exampleFlow.length; i++){
+    //     var flowCardP = $('<p>').text(yogaPosesArr[i].english_name)
+    //     flowCardP.appendTo(flowCardContent);
+    // }
     flowUiCardDiv.appendTo('#main');
 
     for(var i =0; i < localStorage.length; i++){
         var currentArray = JSON.parse(localStorage.getItem(localStorage.key(i)));
         //console.log(localStorage.getItem(localStorage.key(i)));
-        console.log(currentArray);
+        //console.log(currentArray);
 
         var flowUiCardDiv = $('<div>').attr({
             class: "ui link cards"});
@@ -121,7 +122,8 @@ function showFlows () {
         flowCardDiv.appendTo(flowUiCardDiv);
     
         var flowCardContent = $('<div>').attr({
-            class: "content"
+            class: "content",
+            id: "flowClick"
         })
         flowCardContent.appendTo(flowCardDiv);
     
@@ -151,26 +153,33 @@ function saveFlow () {
     $("#showPosesIdField").val(" ");
 }
 
-// $('#main').ready(function(){
-//         exampleFlow, //i might use this for on click here
-//           counter = 0,
-//           timer = setInterval(function(){
-//                 $('#main').html(" ");
-//                 showPose(exampleFlow[counter]);
-//                 counter++
-//                 if (counter === exampleFlow.length) {
-//                     clearInterval(timer);
-//                 }
-//           },2000);
-//     function showPose (poses) {
-//     console.log(poses);
-//     $('<img>').attr('src', yogaPosesArr[poses-1].img_url).prependTo('#main')
-//     }
-// }); // will use this on click when flow is selected
+function startFlow () {
+    var flowClick = JSON.parse(localStorage.getItem($(this).text()));
+    //console.log(flowClick);
+
+    $('#main').ready(function(){
+            flowClick, //i might use this for on click here
+              counter = 0,
+              timer = setInterval(function(){
+                    $('#main').html(" ");
+                    showPose(flowClick[counter]);
+                    counter++
+                    if (counter === flowClick.length) {
+                        clearInterval(timer);
+                    }
+              },2000);
+        function showPose (poses) {
+        //console.log(poses);
+        $('<img>').attr('src', yogaPosesArr[poses-1].img_url).prependTo('#main')
+        }
+    }); // will use this on click when flow is selected
+}
+
 
 
 
 $("#createFlow").on("click", showPoses);
 $("#flows").on("click", showFlows);
 $('#poses').on("click", "#crdHover", addPose);
-$('#main').on("click", "#saveFlowBtn", saveFlow)
+$('#main').on("click", "#saveFlowBtn", saveFlow);
+$('#main').on("click", "#flowClick", startFlow);
