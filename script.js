@@ -154,7 +154,12 @@ function saveFlow () {
 }
 
 function startFlow () {
-    var flowClick = JSON.parse(localStorage.getItem($(this).text()));
+    
+    if ($(this).text() === "Example Flow") {
+        var flowClick = exampleFlow;
+    } else {
+        var flowClick = JSON.parse(localStorage.getItem($(this).text()));
+    }
     //console.log(flowClick);
 
     $('#main').ready(function(){
